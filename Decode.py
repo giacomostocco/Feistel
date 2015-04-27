@@ -36,6 +36,10 @@ for i in range(bytes.length()/32):
 		temp.extend(inLi)	
 	output.extend(temp)
 
+while output[output.length()-1] == 0:
+    output.pop(output.length()-1)
+output.fill()
+
 fOut = open(decodedFile, "wb")
 output.tofile(fOut)
 fOut.close()

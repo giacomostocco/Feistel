@@ -11,7 +11,7 @@ global encodedFile
 encodedFile = "encoded.pgm"
 
 global sampleFile
-sampleFile = "decoded.pgm"
+sampleFile = "lenna.pgm"
 
 global decodedFile
 decodedFile = "attack_decoded.pgm"
@@ -19,19 +19,25 @@ decodedFile = "attack_decoded.pgm"
 start = time.time()
 
 bytes = bitarray()
-data = bitarray()
-output = bitarray()
 
 with open (encodedFile, "rb") as f:
     bytes.fromfile(f)
 
 print bytes.length()
 
+with open(sampleFile, "rb") as fSample:
+    sampleContent = fSample.read()        
+md5sample = hashlib.md5()
+md5sample.update(sampleContent)
+    
 keys = {}
 key = random.randint(1,31)
 keys[key] = True
 found = False
 while not found:
+    print "Decoding with key", key, "..."
+    output = bitarray()
+    data = bitarray()
     for i in range(bytes.length()/32):
         data = bytes[(0+(32*i)):(32+(32*i))]
         temp = bitarray(data)
@@ -42,24 +48,23 @@ while not found:
             temp.extend(inRi ^ (Function.permutation(inLi, key)))
             temp.extend(inLi)    
         output.extend(temp)
+        
+    while output[output.length()-1] == 0:
+        output.pop(output.length()-1)
+    output.fill()
     
     fOut = open(decodedFile, "wb")
     output.tofile(fOut)
     fOut.close()
-    
-    with open(sampleFile, "rb") as fSample:
-        sampleContent = fSample.read()
-        
-    md5sample = hashlib.md5()
-    md5sample.update(sampleContent)
     
     with open(decodedFile, "rb") as fDecoded:
         decodedContent = fDecoded.read()
         
     md5decoded = hashlib.md5()
     md5decoded.update(decodedContent)
-    
-    if md5decoded == md5sample:
+    print md5decoded.hexdigest()
+    print md5sample.hexdigest()
+    if md5decoded.hexdigest() == md5sample.hexdigest():
         found = True
     else:
         while key in keys:

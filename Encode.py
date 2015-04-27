@@ -34,7 +34,9 @@ output = bitarray()
 with open (inputFile, "rb") as f:
 	bytes.fromfile(f)
 
-print bytes.length()
+print bytes.length()%32
+for i in range(bytes.length()%32):
+	bytes.extend("0")
 
 #arguments = []
 #for i in range(bytes.length()/32):
@@ -48,6 +50,9 @@ print bytes.length()
 
 for i in range(bytes.length()/32):
 	data = bytes[(0+(32*i)):(32+(32*i))]
+	if data.length() != 32:
+		print data.length()
+		
 	temp = bitarray(data)
 	for j in range(ITERATIONS):
 		inLi = temp[0:16]
