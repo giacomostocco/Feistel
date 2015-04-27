@@ -23,7 +23,7 @@ def feistel(data):
 		temp = bitarray()		
 		temp.extend(inRi)	
 		temp.extend(inLi ^ (Function.permutation(inRi, KEY)))
-		return temp
+	return temp
 
 start = time.time()
 
