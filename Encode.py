@@ -4,7 +4,7 @@ import multiprocessing
 from Function import Function
 
 global ITERATIONS
-ITERATIONS = 5
+ITERATIONS = 16
 
 global KEY
 KEY = 9
