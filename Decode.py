@@ -3,16 +3,16 @@ import time
 from Function import Function
 
 global ITERATIONS
-ITERATIONS = 5
+ITERATIONS = 16
 
 global KEY
 KEY = 9
 
 global encodedFile
-encodedFile = "Scrivania/encoded.CR2"
+encodedFile = "encoded.pgm"
 
 global decodedFile
-decodedFile = "Scrivania/decoded.CR2"
+decodedFile = "decoded.pgm"
 
 start = time.time()
 
