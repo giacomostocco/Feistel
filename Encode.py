@@ -10,7 +10,7 @@ global KEY
 KEY = 9
 
 global inputFile
-inputFile = "test2.pgm"
+inputFile = "lenna.pgm"
 
 global encodedFile
 encodedFile = "encoded.pgm"
