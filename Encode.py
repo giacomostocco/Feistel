@@ -38,7 +38,8 @@ fOut.close()
 
 print "Encoded succesfully: elapsed time", time.time()-start, "seconds."
 
-socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+socket.connect((Util.ADDRESS, Util.ENCODEPORT))
 
 file = open(Util.encodedFile, "rb")
 
@@ -46,7 +47,7 @@ print "Sending to server ..."
 
 while True: 
 	data = file.read(Util.SIZE)
-	socket.sendto(data, (Util.ADDRESS, Util.ENCODEPORT))	
+	socket.sendto(data)	
 	if data == "": 
 	    	break	   
 file.close()
