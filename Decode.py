@@ -1,7 +1,7 @@
 from bitarray import bitarray
 import time
 from Function import Function
-from Server import ServerUDP
+from Server import Server
 import Util
 
 socket = Server.initServerSocket(Util.ADDRESS, Util.DECODEPORT)
