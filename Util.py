@@ -1,4 +1,4 @@
-
+#indirizzo di chi esegue il decode
 global ADDRESS
 ADDRESS = "192.168.43.41"
 
