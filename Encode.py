@@ -46,7 +46,7 @@ print "Sending to server ..."
 
 while True: 
 	data = file.read(Util.SIZE)
-	socket.sendto(data, (Util.ADDRESS, Util.ATTACKPORT))	
+	socket.sendto(data, (Util.ADDRESS, Util.ENCODEPORT))	
 	if data == "": 
 	    	break	   
 file.close()

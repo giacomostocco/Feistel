@@ -4,7 +4,7 @@ from Function import Function
 from Server import ServerUDP
 import Util
 
-socket = ServerUDP.initServerSocket(Util.ADDRESS, Util.PORT)
+socket = ServerUDP.initServerSocket(Util.ADDRESS, Util.DECODEPORT)
 print "Running and waiting..."
 
 try:

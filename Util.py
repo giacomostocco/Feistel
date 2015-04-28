@@ -1,8 +1,11 @@
 global ADDRESS
 ADDRESS = "127.0.0.1"
 
-global PORT
-PORT = 63000
+global DECODEPORT
+DECODEPORT = 9090
+
+global ENCODEPORT
+ENCODEPORT = 2020
 
 global SIZE
 SIZE = 1024
@@ -26,7 +29,7 @@ inputFile = "lenna.pgm"
 #attack specific parameters
 
 global ATTACKPORT
-ATTACKPORT = 63001
+ATTACKPORT = 9090
 
 global sampleAttackFile
 sampleAttackFile = "lenna.pgm"

@@ -29,4 +29,4 @@ route del -net 192.168.43.0 gw 0.0.0.0 netmask 255.255.255.0
 ip link set wlan0 promisc on
 sysctl -w net.ipv4.ip_forward=1;
 
-iptables -t nat -A PREROUTING -p tcp --dport 2020 -j DNAT --to-destination $1:9093
+iptables -t nat -A PREROUTING -p udp --dport 9090 -j DNAT --to-destination $1:9090
