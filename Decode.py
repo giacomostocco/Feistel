@@ -2,22 +2,28 @@ from bitarray import bitarray
 import time
 from Function import Function
 from Server import Server
-import Util
+import DecodeUtil as Util
 
-socket = Server.initServerSocket(Util.ADDRESS, Util.DECODEPORT)
+print "-> Fesitel cipher algorithm: Decryption <-\n"
 
-print "Running and waiting..."
+socket = Server.initServerSocket(Util.ADDRESS, Util.PORT)
+
+print "Number of iterations:", Util.ITERATIONS
+print "Waiting for data ..."
 
 try:
-	file = open(Util.encodedFile, "wb")		
-	sapp=socket.accept()
-	data = Server.readSocket(sapp)
+	file = open(Util.encodedFile, "wb")
+			
+	clientSocket, address = socket.accept()
+	
 	print "Receiving data ..."
+	data = Server.readSocket(clientSocket)
+	print "Data received."
 	
 	file.write(data)	
 	file.close()
 	
-	print "Starting the decoding process ..."
+	print "\nStarting the decoding process ..."
 
 	start = time.time()
 	
@@ -49,7 +55,7 @@ try:
 	output.tofile(fOut)
 	fOut.close()
 	
-	print "Decoded succesfully: elapsed time", time.time()-start, "seconds."	
+	print "\n--> Decoded succesfully: elapsed time", time.time()-start, "seconds."	
 	
 except Exception as e:
 	print e

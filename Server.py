@@ -1,5 +1,4 @@
 import socket
-import Util
 
 class Server:   
     
@@ -13,11 +12,11 @@ class Server:
     
     @staticmethod
     def readSocket(socket):
-        text = ""
+        data = ""
         
         while True:
-            string, address = socket.recv(Util.SIZE)
-            if string == "":
+            tempData = socket.recv(1024)
+            if tempData == "":
                 break
-            text = text + string
-        return text
+            data = data + tempData
+        return data

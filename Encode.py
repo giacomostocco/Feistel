@@ -3,7 +3,9 @@ import time
 import socket
 import multiprocessing
 from Function import Function
-import Util
+import EncodeUtil as Util
+
+print "-> Fesitel cipher algorithm: Encryption <-\n"
 
 start = time.time()
 
@@ -14,7 +16,10 @@ output = bitarray()
 with open (Util.inputFile, "rb") as f:
 	bytes.fromfile(f)
 
-print "Data length:", ((bytes.length()/8)/1024), "KB"
+print "Encoding key:", Util.KEY
+print "Number of iterations:", Util.ITERATIONS
+print "Data length:", ((bytes.length()/8)/1024), "KB\n"
+
 for i in range(bytes.length()%32):
 	bytes.extend("0")
 
@@ -39,18 +44,18 @@ fOut.close()
 print "Encoded succesfully: elapsed time", time.time()-start, "seconds."
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket.connect((Util.ADDRESS, Util.ENCODEPORT))
+socket.connect((Util.ADDRESS, Util.PORT))
 
 file = open(Util.encodedFile, "rb")
 
 print "Sending to server ..."
 
 while True: 
-	data = file.read(Util.SIZE)
+	data = file.read(1024)
 	socket.send(data)	
 	if data == "": 
 	    	break	   
 file.close()
 socket.close()
 
-print "Terminated."
+print "\n--> Terminated."

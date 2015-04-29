@@ -3,22 +3,28 @@ import time
 import random
 import hashlib
 from Function import Function
-from Server import ServerUDP
-import Util
+from Server import Server
+import AttackUtil as Util
 
-socket = ServerUDP.initServerSocket(Util.ADDRESS, Util.ATTACKPORT)
-print "Running and waiting..."
+print "-> Fesitel cipher algorithm: Attack <-\n"
+
+socket = Server.initServerSocket(Util.ADDRESS, Util.PORT)
+
+print "Waiting for data ..."
 
 try:
     file = open(Util.encodedAttackFile, "wb")        
     
-    data = ServerUDP.readSocket(socket)
+    clientSocket, address = socket.accept()
+    
     print "Receiving data ..."
+    data = Server.readSocket(clientSocket)
+    print "Data received."
     
     file.write(data)    
     file.close()
     
-    print "Starting the attack operations ..."
+    print "\nStarting the attack operations ..."
 
     start = time.time()
     
@@ -35,7 +41,7 @@ try:
     md5sample.update(sampleContent)
         
     keys = {}
-    key = random.randint(1,31)
+    key = random.randint(1,15)
     keys[key] = True
     found = False
     while not found:
@@ -72,10 +78,10 @@ try:
             found = True
         else:
             while key in keys:
-                key = random.randint(1,31)
+                key = random.randint(1,15)
             keys[key] = True
     
-    print "\nDecoded succesfully: elapsed time", time.time()-start, "seconds, key", key,"."
+    print "\n--> Decoded succesfully: elapsed time", time.time()-start, "seconds, key", key,"."
     
 except Exception as e:
     print e
