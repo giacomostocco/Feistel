@@ -2,19 +2,19 @@ import socket
 import os
 
 global inIP
-inIP = "127.0.0.1"
+inIP = "172.1.1.1"
 
 global inPORT
 inPORT = 2020
 
 global outIP
-outIP = "127.0.0.1"
+outIP = "172.1.2.2"
 
 global outPORT
 outPORT = 9090
 
 global mirrorIP
-mirrorIP = "127.0.0.1"
+mirrorIP = "172.1.1.9"
 
 global mirrorPORT
 mirrorPORT = 9090
@@ -22,6 +22,8 @@ mirrorPORT = 9090
 inSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 inSocket.bind((inIP, inPORT))
 inSocket.listen(5)
+
+print "Running and waiting . . ."
 
 while True:
 	
@@ -40,7 +42,8 @@ while True:
 					break
 				data = data + string
 			
-			print "\n\n\t\t\t-------------------------\n-> ", address, "---: \n", data
+			ip, port = address
+			print "\tData received from", ip
 			
 			outSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			outSocket.connect((outIP, outPORT))
